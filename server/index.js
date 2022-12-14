@@ -42,19 +42,29 @@ exports.__esModule = true;
 var express_1 = __importDefault(require("express"));
 var mongoose_1 = __importDefault(require("mongoose"));
 var User_1 = __importDefault(require("./models/User"));
+var Cat_1 = __importDefault(require("./models/Cat"));
 var app = (0, express_1["default"])();
 var PORT = 8080;
 var syncAndSeed = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var user;
+    var user, bojji, luma;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 mongoose_1["default"].connect("mongodb://localhost/appdb");
                 user = new User_1["default"]({ firstName: "Jackie", lastName: 'Smith', age: 25, email: "jackiesmith@gmail.com" });
-                return [4 /*yield*/, user.save()];
+                bojji = new Cat_1["default"]({ name: "Bojji", breed: 'European Shorthair', age: 7, weight: 7.3, owner: "639a36381666893ff7d92802" });
+                luma = new Cat_1["default"]({ name: "Luma", breed: 'European Shorthair', age: 7, weight: 6.5, owner: "639a36381666893ff7d92802" });
+                return [4 /*yield*/, bojji.save()];
             case 1:
                 _a.sent();
+                return [4 /*yield*/, luma.save()];
+            case 2:
+                _a.sent();
+                return [4 /*yield*/, user.save()];
+            case 3:
+                _a.sent();
                 console.log("user saved", user);
+                console.log("cat saved", bojji, luma);
                 return [2 /*return*/];
         }
     });

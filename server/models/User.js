@@ -17,6 +17,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+
+  cats: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Cat"
+  }]
 })
 
 module.exports = mongoose.model("User", userSchema)
