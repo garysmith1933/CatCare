@@ -7,7 +7,7 @@ const PORT = 8080;
 
 const syncAndSeed = async() => {
   mongoose.connect("mongodb://localhost/appdb")
-  const user = new User({name: "Jackie", age: 25})
+  const user = new User({firstName: "Jackie", lastName: 'Smith', age: 25, email: "jackiesmith@gmail.com"})
   await user.save()
   console.log("user saved", user)
 }

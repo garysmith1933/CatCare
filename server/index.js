@@ -50,7 +50,7 @@ var syncAndSeed = function () { return __awaiter(void 0, void 0, void 0, functio
         switch (_a.label) {
             case 0:
                 mongoose_1["default"].connect("mongodb://localhost/appdb");
-                user = new User_1["default"]({ name: "Jackie", age: 25 });
+                user = new User_1["default"]({ firstName: "Jackie", lastName: 'Smith', age: 25, email: "jackiesmith@gmail.com" });
                 return [4 /*yield*/, user.save()];
             case 1:
                 _a.sent();
