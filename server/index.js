@@ -52,19 +52,22 @@ var syncAndSeed = function () { return __awaiter(void 0, void 0, void 0, functio
             case 0:
                 mongoose_1["default"].connect("mongodb://localhost/appdb");
                 user = new User_1["default"]({ firstName: "Jackie", lastName: 'Smith', age: 25, email: "jackiesmith@gmail.com" });
-                bojji = new Cat_1["default"]({ name: "Bojji", breed: 'European Shorthair', age: 7, weight: 7.3, owner: "639a36381666893ff7d92802" });
-                luma = new Cat_1["default"]({ name: "Luma", breed: 'European Shorthair', age: 7, weight: 6.5, owner: "639a36381666893ff7d92802" });
-                return [4 /*yield*/, bojji.save()];
+                return [4 /*yield*/, new Cat_1["default"]({ name: "Bojji", breed: 'European Shorthair', age: 7, weight: 7.3, owner: "639a36381666893ff7d92802" }).populate("owner")];
             case 1:
-                _a.sent();
-                return [4 /*yield*/, luma.save()];
+                bojji = _a.sent();
+                return [4 /*yield*/, new Cat_1["default"]({ name: "Luma", breed: 'European Shorthair', age: 7, weight: 6.5, owner: "639a36381666893ff7d92802" }).populate("owner")];
             case 2:
-                _a.sent();
-                return [4 /*yield*/, user.save()];
+                luma = _a.sent();
+                return [4 /*yield*/, bojji.save()];
             case 3:
                 _a.sent();
-                console.log("user saved", user);
-                console.log("cat saved", bojji, luma);
+                return [4 /*yield*/, luma.save()];
+            case 4:
+                _a.sent();
+                return [4 /*yield*/, user.save()];
+            case 5:
+                _a.sent();
+                console.log("cat saved", luma);
                 return [2 /*return*/];
         }
     });
