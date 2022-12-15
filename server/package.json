@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc -w",
+    "seed": "node seed.js",
+    "build": "tsc index.ts --esModuleInterop",
     "start": "nodemon index.js"
   },
   "keywords": [],
