@@ -29,7 +29,7 @@ const seedCats = [
     breed: 'European Shorthair', 
     age: 7, 
     weight: 6.5, 
-    // owner: User.find({name: "Jackie"},  "_id")
+    // owner: User.find({name: "Jackie"}.lean()
   }
 ];
 
@@ -40,10 +40,16 @@ const seed = async () => {
   await Cat.deleteMany({});
 
   await User.insertMany(seedUsers);
-  await Cat.insertMany(seedCats);
-  
+  const cats = await Cat.insertMany(seedCats);
+
+  cats.map(async cat => {
+    await cat.save();
+  })
+
+
   
   console.log("Users and Cats seeded");
+
 }
 
 seed().then(() => mongoose.connection.close());
