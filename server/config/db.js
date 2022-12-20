@@ -1,17 +1,16 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
+const Cat = require("../models/Cat")
+const User = require("../models/User")
 
-const db = process.env.MONGO_URI;
+const uri = process.env.MONGO_URI;
 
 const connectToDB = () => {
-  console.log(db)
   try {
-    mongoose.connect(db, {
+    mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-    });
-
-    console.log("MongoDB is connected");
+    }).then(() => console.log("MongoDB is connected"));
   } 
   
   catch (err) {

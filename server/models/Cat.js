@@ -12,12 +12,8 @@ const catSchema = new mongoose.Schema({
   age: Number,
 
   weight: Decimal128,
-
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  }
-
 })
 
-module.exports = mongoose.model("Cat", catSchema)
+const Cat = mongoose.model('Cat', catSchema, 'Cat')
+
+module.exports = Cat
