@@ -1,6 +1,5 @@
 import express, { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { readFile } from 'fs/promises';
 import resolvers from './resolvers'
 import connectToDB from './config/db';
 import typeDefs from './schema/schema.js'
