@@ -1,4 +1,3 @@
-const { Decimal128 } = require("mongodb")
 const mongoose = require("mongoose")
 
 const catSchema = new mongoose.Schema({
@@ -11,13 +10,9 @@ const catSchema = new mongoose.Schema({
 
   age: Number,
 
-  weight: Decimal128,
-
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  }
-
+  weight: mongoose.Decimal128,
 })
 
-module.exports = mongoose.model("Cat", catSchema)
+const Cat = mongoose.model('Cat', catSchema, 'Cat')
+
+module.exports = Cat
