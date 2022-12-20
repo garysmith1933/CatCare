@@ -33,8 +33,6 @@ const seedCats = [
   }
 ];
 
-
-
 const seed = async () => {
   await User.deleteMany({});
   await Cat.deleteMany({});
@@ -46,17 +44,15 @@ const seed = async () => {
 
   const user1 = User.create(Jackie, function(err, _user) {
     if(err) console.log(err)
-    console.log(_user)
-
+  
     cats.map( async cat => {
       _user.cats.push(cat)
     })
 
-    //we have access to the id here,
-    //we can iterate over the cats that belong to her
     _user.save()
     console.log(_user)
   });
+
   console.log("Users and Cats seeded");
 }
 
