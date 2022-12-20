@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
-const Cat = require("../models/Cat")
-const User = require("../models/User")
 
 const uri = process.env.MONGO_URI;
 

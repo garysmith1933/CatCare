@@ -3,8 +3,8 @@ const Cat = require("./models/Cat")
 
 const resolvers = {
   Query: {
-    users: () => User.find({}),
-    cats: () => Cat.find({})
+    users: async () => await User.find({}),
+    cats: async () => await Cat.find({})
   }
 }
 

@@ -8,7 +8,7 @@ const typeDefs = gql `
 
   type User {
     firstName: String,
-    LastName: String,
+    lastName: String,
     age: Int,
     email: String
   }

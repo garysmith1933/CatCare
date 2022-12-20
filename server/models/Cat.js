@@ -10,7 +10,8 @@ const catSchema = new mongoose.Schema({
 
   age: Number,
 
-  weight: mongoose.Decimal128,
+  //This needs to be fixed
+  weight: Number
 })
 
 const Cat = mongoose.model('Cat', catSchema, 'Cat')
