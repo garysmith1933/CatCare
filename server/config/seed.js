@@ -22,14 +22,14 @@ const seedCats = [
     name: "Bojji", 
     breed: 'European Shorthair', 
     age: 7, 
-    weight: 7.3, 
+    weight: "7.3"
   },
 
   {
     name: "Luma", 
     breed: 'European Shorthair', 
     age: 7, 
-    weight: 6.5, 
+    weight: "6.5"
   }
 ];
 

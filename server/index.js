@@ -40,19 +40,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 exports.__esModule = true;
 var express_1 = __importDefault(require("express"));
-var promises_1 = require("fs/promises");
+var apollo_server_express_1 = require("apollo-server-express");
+var resolvers_1 = __importDefault(require("./resolvers"));
 var db_1 = __importDefault(require("./config/db"));
+var schema_js_1 = __importDefault(require("./schema/schema.js"));
 require("dotenv").config();
 var app = (0, express_1["default"])();
 var PORT = 8080;
-var typeDefs = (0, promises_1.readFile)('./schema.graphql', 'utf-8');
-// const apolloServer = new ApolloServer({typeDefs: String, resolvers})
+var apolloServer = new apollo_server_express_1.ApolloServer({ typeDefs: schema_js_1["default"], resolvers: resolvers_1["default"] });
 (0, db_1["default"])();
 app.listen(PORT, function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        // await apolloServer.start();
-        // apolloServer.applyMiddleware({ app, path: '/graphql'});
-        console.log("listening on port ".concat(PORT));
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, apolloServer.start()];
+            case 1:
+                _a.sent();
+                apolloServer.applyMiddleware({ app: app, path: '/graphql' });
+                console.log("listening on port ".concat(PORT));
+                console.log("GraphQL endpoint: http:localhost:".concat(PORT, "/graphql"));
+                return [2 /*return*/];
+        }
     });
 }); });
