@@ -6,6 +6,25 @@ const typeDefs = gql `
     cats: [Cat]
   }
 
+  type Mutation {
+    createUser(input: CreateUserInput): User
+    createCat(input: CreateCatInput): Cat
+  }
+
+  input CreateUserInput {
+    firstName: String
+    lastName: String
+    age: Int
+    email: String
+  }
+
+  input CreateCatInput {
+    name: String
+    breed: String
+    age: Int
+    weight: String
+  }
+
   type User {
     firstName: String,
     lastName: String,
