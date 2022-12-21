@@ -1,3 +1,4 @@
+const { Decimal128 } = require("mongodb")
 const mongoose = require("mongoose")
 
 const catSchema = new mongoose.Schema({
@@ -10,8 +11,7 @@ const catSchema = new mongoose.Schema({
 
   age: Number,
 
-  //This needs to be fixed
-  weight: Number
+  weight: String
 })
 
 const Cat = mongoose.model('Cat', catSchema, 'Cat')
