@@ -17,6 +17,7 @@ const resolvers = {
         ...res._doc
       }
     },
+
     createCat: async (_root, { input }) => {
       const cat = new Cat(input);
       const res = await cat.save();
@@ -27,15 +28,20 @@ const resolvers = {
       }
     },
 
-    deleteUser: async (_root, {ID}) => {
+    deleteUser: async (_root, { ID }) => {
       const deletedUser = (await User.deleteOne({_id: ID})).deletedCount;
       return deletedUser; //expecting this to be 1 if something was deleted.
     },
 
-    deleteCat: async (_root, {ID}) => {
+    deleteCat: async (_root, { ID }) => {
       const deletedCat = (await Cat.deleteOne({_id: ID})).deletedCount;
       return deletedCat;
-      }
+    },
+
+    editUser: async (_root, { ID, userInput }) => {
+      const editedUser = (await User.updateOne({_id: ID}, {...userInput})).modifiedCount;
+      return editedUser;
+    },
   }
 }
 

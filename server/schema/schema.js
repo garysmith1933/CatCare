@@ -7,21 +7,23 @@ const typeDefs = gql `
   }
 
   type Mutation {
-    createUser(input: CreateUserInput): User!
-    createCat(input: CreateCatInput): Cat!
+    createUser(input: UserInput!): User!
     deleteUser(ID: ID!): Boolean!
+    editUser(ID: ID!, userInput: UserInput): Boolean!
+
+    createCat(input: CatInput!): Cat!
     deleteCat(ID: ID!): Boolean!
-  
+    editCat(ID: ID!, catInput: CatInput): Boolean! 
   }
 
-  input CreateUserInput {
+  input UserInput {
     firstName: String
     lastName: String
     age: Int
     email: String
   }
 
-  input CreateCatInput {
+  input CatInput {
     name: String
     breed: String
     age: Int
