@@ -7,11 +7,20 @@ const catSchema = new mongoose.Schema({
     required: true
   },
 
-  breed: String,
+  breed: {
+    type: String,
+    required: true
+  },
 
-  age: Number,
+  age: {
+    type: Number,
+    required: true
+  },
 
-  weight: String
+  weight: {
+    type: String,
+    required: true
+  }
 })
 
 const Cat = mongoose.model('Cat', catSchema, 'Cat')
