@@ -9,15 +9,23 @@ const resolvers = {
 
   Mutation: {
     createUser: async (_root, { input }) => {
-      const user = new User(input)
-      const res = await user.save()
+      const user = new User(input);
+      const res = await user.save();
 
       return {
         id: res.id,
         ...res._doc
       }
     },
-    createCat: async (_root, { input }) => await Cat.create({...input})
+    createCat: async (_root, { input }) => {
+      const cat = new Cat(input);
+      const res = await cat.save();
+
+      return {
+        id: res.id,
+        ...res._doc
+      }
+    }
   }
 }
 
