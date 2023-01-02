@@ -8,8 +8,16 @@ const resolvers = {
   },
 
   Mutation: {
-    createUser: async ({ input }) => await User.create({...input}),
-    createCat: async ({ input }) => await Cat.create({...input})
+    createUser: async (_root, { input }) => {
+      const user = new User(input)
+      const res = await user.save()
+
+      return {
+        id: res.id,
+        ...res._doc
+      }
+    },
+    createCat: async (_root, { input }) => await Cat.create({...input})
   }
 }
 

@@ -7,8 +7,8 @@ const typeDefs = gql `
   }
 
   type Mutation {
-    createUser(input: CreateUserInput): User
-    createCat(input: CreateCatInput): Cat
+    createUser(input: CreateUserInput): User!
+    createCat(input: CreateCatInput): Cat!
   }
 
   input CreateUserInput {
