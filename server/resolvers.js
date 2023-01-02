@@ -42,6 +42,11 @@ const resolvers = {
       const editedUser = (await User.updateOne({_id: ID}, {...userInput})).modifiedCount;
       return editedUser;
     },
+
+    editCat: async (_root, { ID, catInput }) => {
+      const editedCat = (await Cat.updateOne({_id: ID}, {...catInput})).modifiedCount;
+      return editedCat;
+    },
   }
 }
 
