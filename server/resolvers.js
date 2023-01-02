@@ -25,7 +25,17 @@ const resolvers = {
         id: res.id,
         ...res._doc
       }
-    }
+    },
+
+    deleteUser: async (_root, {ID}) => {
+      const deletedUser = (await User.deleteOne({_id: ID})).deletedCount;
+      return deletedUser; //expecting this to be 1 if something was deleted.
+    },
+
+    deleteCat: async (_root, {ID}) => {
+      const deletedCat = (await Cat.deleteOne({_id: ID})).deletedCount;
+      return deletedCat;
+      }
   }
 }
 

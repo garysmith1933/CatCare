@@ -9,6 +9,9 @@ const typeDefs = gql `
   type Mutation {
     createUser(input: CreateUserInput): User!
     createCat(input: CreateCatInput): Cat!
+    deleteUser(ID: ID!): Boolean!
+    deleteCat(ID: ID!): Boolean!
+  
   }
 
   input CreateUserInput {
