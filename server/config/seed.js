@@ -9,10 +9,10 @@ mongoose.connect(uri);
 //Users
 const Jackie = 
   {
-    firstName: "Jackie", 
-    lastName: 'Smith', 
-    age: 25, 
-    email: "jackiesmith@gmail.com"
+    username: "JackieSmith97",
+    email: "jackiesmith@gmail.com",
+    password: "basic103",
+    token: "something"
   }
 ;
 

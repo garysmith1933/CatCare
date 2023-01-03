@@ -1,23 +1,26 @@
 const mongoose = require("mongoose")
 
 const userSchema = new mongoose.Schema({
-  firstName: {
+  username: {
     type: String,
     required: true
   },
-
-  lastName: {
-    type: String,
-    required: true
-  },
-
-  age: Number,
 
   email: {
     type: String,
     required: true
   },
 
+  password: {
+    type: String,
+    required: true
+  },
+
+  token: {
+    type: String,
+    required: true
+  },
+  
   cats: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Cat"
