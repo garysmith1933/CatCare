@@ -6,7 +6,7 @@ import typeDefs from './schema/schema.js'
 require("dotenv").config();
 
 const app: Application = express();
-const PORT = 8080;
+const PORT: Number = 8080;
 
 const apolloServer = new ApolloServer({typeDefs, resolvers})
 
