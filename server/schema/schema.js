@@ -5,6 +5,7 @@ const typeDefs = gql `
     users: [User]
     user(ID: ID!): User
     cats: [Cat]
+    cat(ID: ID!): Cat
   }
 
   type Mutation {

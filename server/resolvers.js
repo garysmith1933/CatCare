@@ -8,7 +8,8 @@ const resolvers = {
   Query: {
     users: async () => await User.find({}),
     user: async (_root, { ID }) => await User.findById(ID),
-    cats: async () => await Cat.find({})
+    cats: async () => await Cat.find({}),
+    cat: async (_root, { ID }) => await Cat.findById(ID)
   },
 
   Mutation: {
