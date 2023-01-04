@@ -1,17 +1,45 @@
 const User = require("./models/User")
 const Cat = require("./models/Cat")
+const { ApolloError } = require('apollo-server-errors')
+const jwt = require("jsonwebtoken")
+const bcrypt = require("bcryptjs")
 
 const resolvers = {
   Query: {
     users: async () => await User.find({}),
-    cats: async () => await Cat.find({})
+    user: async (_root, { ID }) => await User.findById(ID),
+    cats: async () => await Cat.find({}),
+    cat: async (_root, { ID }) => await Cat.findById(ID)
   },
 
   Mutation: {
     //USER MUTATIONS
-    createUser: async (_root, { input }) => {
-      const user = new User(input);
-      const res = await user.save();
+    createUser: async (_root, {input: {username, email, password}}) => {
+
+      const alreadyExists = await User.findOne({email});
+
+      if (alreadyExists) {
+        throw new ApolloError(`A user is already registered with that email ${email}, 'USER_ALREADY_EXISTS`);
+      }
+
+      const encryptedPassword = await bcrypt.hash(password, 10);
+
+      const newUser = new User({
+        username: username,
+        email: email.toLowerCase(),
+        password: encryptedPassword
+      });
+
+      const token = jwt.sign(
+        { user_id: newUser._id, email}, 
+        process.env.SECRET,
+        {
+          expiresIn: "2h"
+        }
+      );
+
+      newUser.token = token;
+      const res = await newUser.save();
 
       return {
         id: res.id,
