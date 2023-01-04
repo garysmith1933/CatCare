@@ -41,13 +41,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 exports.__esModule = true;
 var express_1 = __importDefault(require("express"));
 var apollo_server_express_1 = require("apollo-server-express");
-var resolvers_1 = __importDefault(require("./resolvers"));
+var index_js_1 = __importDefault(require("./resolvers/index.js"));
 var db_1 = __importDefault(require("./config/db"));
 var schema_js_1 = __importDefault(require("./schema/schema.js"));
 require("dotenv").config();
 var app = (0, express_1["default"])();
 var PORT = 8080;
-var apolloServer = new apollo_server_express_1.ApolloServer({ typeDefs: schema_js_1["default"], resolvers: resolvers_1["default"] });
+var apolloServer = new apollo_server_express_1.ApolloServer({ typeDefs: schema_js_1["default"], resolvers: index_js_1["default"] });
 (0, db_1["default"])();
 app.listen(PORT, function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {

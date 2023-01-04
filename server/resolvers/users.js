@@ -1,5 +1,4 @@
-const User = require("./models/User")
-const Cat = require("./models/Cat")
+const User = require("../models/User")
 const { ApolloError } = require('apollo-server-errors')
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
@@ -8,12 +7,9 @@ const resolvers = {
   Query: {
     users: async () => await User.find({}),
     user: async (_root, { ID }) => await User.findById(ID),
-    cats: async () => await Cat.find({}),
-    cat: async (_root, { ID }) => await Cat.findById(ID)
   },
 
   Mutation: {
-    //USER MUTATIONS
     createUser: async (_root, {input: {username, email, password}}) => {
 
       const alreadyExists = await User.findOne({email});
@@ -79,28 +75,7 @@ const resolvers = {
       } else {
         throw new ApolloError(`Incorrect password, 'INCORRECT_PASSWORD'`)
       }
-    },
-
-    //CAT MUTATIONS
-    createCat: async (_root, { input }) => {
-      const cat = new Cat(input);
-      const res = await cat.save();
-
-      return {
-        id: res.id,
-        ...res._doc
-      }
-    },
-
-    deleteCat: async (_root, { ID }) => {
-      const deletedCat = (await Cat.deleteOne({_id: ID})).deletedCount;
-      return deletedCat;
-    },
-
-    editCat: async (_root, { ID, catInput }) => {
-      const editedCat = (await Cat.updateOne({_id: ID}, {...catInput})).modifiedCount;
-      return editedCat;
-    },
+    }
   }
 }
 

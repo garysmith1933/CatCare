@@ -12,7 +12,7 @@ const typeDefs = gql `
     createUser(input: NewUserInput!): User!
     deleteUser(ID: ID!): Boolean!
     editUser(ID: ID!, userInput: UpdateUserInput): Boolean!
-    loginUser(loginInput: LoginInput): User
+    loginUser(loginInput: LoginInput): User!
 
     createCat(input: RegisterAndUpdateCatInput!): Cat!
     deleteCat(ID: ID!): Boolean!
