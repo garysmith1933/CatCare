@@ -1,4 +1,5 @@
 const Cat = require("../models/Cat");
+//Need to implement errors
 const { ApolloError } = require('apollo-server-errors');
 
 const resolvers = {
