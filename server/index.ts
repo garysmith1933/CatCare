@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import resolvers from './resolvers'
+import resolvers from './resolvers/index.js'
 import connectToDB from './config/db';
 import typeDefs from './schema/schema.js'
 require("dotenv").config();
