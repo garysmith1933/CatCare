@@ -57,6 +57,30 @@ const resolvers = {
       return editedUser;
     },
 
+    loginUser: async (_root, {loginInput: {email, password}}) => {
+      const user = await User.findOne({email});
+
+      if (user && (await bcrypt.compare(password, user.password))) {
+
+        const token = jwt.sign(
+          { user_id: newUser._id, email}, 
+          process.env.SECRET,
+          {
+            expiresIn: "2h"
+          }
+        );
+
+        user.token = token;
+
+        return {
+          id: user.id,
+          ...user._doc
+        }
+      } else {
+        throw new ApolloError(`Incorrect password, 'INCORRECT_PASSWORD'`)
+      }
+    },
+
     //CAT MUTATIONS
     createCat: async (_root, { input }) => {
       const cat = new Cat(input);
