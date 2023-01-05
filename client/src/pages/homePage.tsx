@@ -1,8 +1,13 @@
-import { FC } from 'react'
+import { FC } from 'react';
+import Navbar from '../components/Navbar'
 
 const Homepage: FC = () => {
   return (
-    <h1> This is the homepage </h1>
+    <>
+      <Navbar/>
+      <h1> This is the homepage </h1>
+    </>
+    
   )
 }
 
