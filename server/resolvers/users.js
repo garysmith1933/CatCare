@@ -55,11 +55,11 @@ const resolvers = {
 
     loginUser: async (_root, {loginInput: {email, password}}) => {
       const user = await User.findOne({email});
-
+      
       if (user && (await bcrypt.compare(password, user.password))) {
 
         const token = jwt.sign(
-          { user_id: newUser._id, email}, 
+          { user_id: user._id, email}, 
           process.env.SECRET,
           {
             expiresIn: "2h"
