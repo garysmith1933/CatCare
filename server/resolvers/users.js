@@ -10,8 +10,7 @@ const resolvers = {
   },
 
   Mutation: {
-    createUser: async (_root, {input: {username, email, password}}) => {
-
+    createUser: async (_root, {userInput: {username, email, password}}) => {
       const alreadyExists = await User.findOne({email});
 
       if (alreadyExists) {
