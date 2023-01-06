@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { AuthContext, AuthProvider } from "../context/authContext";
+import { AuthContext } from "../context/authContext";
 import { useForm } from "../utilites/hooks";
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "graphql-tag"
@@ -17,7 +17,7 @@ const SIGNUP_USER =  gql `
 `
 
 function Signup() {
-  const context = useContext(AuthProvider);
+  const context = useContext(AuthContext);
   let navigate = useNavigate();
   const [ errors, setErrors ] = useState([]);
 
@@ -69,7 +69,7 @@ function Signup() {
         />
          <TextField
           label="Confirm password"
-          name="confirm password"
+          name="confirmPassword"
           onChange={onChange}
         />
       </Stack>
