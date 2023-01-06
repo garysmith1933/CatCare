@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext, AuthProvider } from "../context/authContext";
 import { useForm } from "../utilites/hooks";
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "graphql-tag"
@@ -7,21 +7,17 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Button, Container, Stack, Alert } from '@mui/material';
 
 const SIGNUP_USER =  gql `
-  mutation Mutation (
-    $userInput: NewUserInput
-  ) {
-    createUser(
-      userInput: $userInput
-    ) {
+  mutation Mutation($userInput: NewUserInput!) {
+    createUser(userInput: $userInput) {
       email
       username
       token
     }
-  }
+}
 `
 
 function Signup() {
-  const context = useContext(AuthContext);
+  const context = useContext(AuthProvider);
   let navigate = useNavigate();
   const [ errors, setErrors ] = useState([]);
 
@@ -38,7 +34,8 @@ function Signup() {
   })
 
   const [ signupUser, { loading } ] = useMutation(SIGNUP_USER, {
-    update(proxy, { data: { registerUser: userData }}) {
+    update(proxy, { data: { createUser: userData }}) {
+      console.log('we made it')
       context.login(userData);
       navigate('/');
     },
@@ -47,7 +44,7 @@ function Signup() {
       setErrors(graphQLErrors);
     },
 
-    variables: { registerInput: values }
+    variables: { userInput: values }
   })
 
   return (
