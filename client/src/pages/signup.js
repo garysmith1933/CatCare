@@ -6,7 +6,7 @@ import { gql } from "graphql-tag"
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Container, Stack, Alert } from '@mui/material';
 
-const SIGNUP_USER =  gql `
+const SIGNUP_USER =  gql`
   mutation Mutation($userInput: NewUserInput!) {
     createUser(userInput: $userInput) {
       email
