@@ -1,7 +1,6 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FC, useContext } from 'react'
 import { AuthContext } from "../context/authContext";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
 const Navbar: FC = () => {

@@ -4,7 +4,8 @@ import { useForm } from "../utilites/hooks";
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "graphql-tag"
 import { useNavigate } from "react-router-dom";
-import { TextField, Button, Container, Stack, Alert } from '@mui/material';
+import { TextField, Button, Stack, Alert } from '@mui/material';
+import Container from '@mui/material/Container'
 
 const LOGIN_USER = gql`
 mutation LoginUser($loginInput: LoginInput) {
@@ -46,7 +47,8 @@ const Login = () => {
   })
 
   return (
-    <Container spacing={2} maxWidth="sm"> 
+    <>
+      <Container spacing={2} maxWidth="sm"> 
       <h3>Login Page</h3>
       <p>Login below</p>
       <Stack spacing={2} paddingBottom={2}>
@@ -70,6 +72,8 @@ const Login = () => {
       })}
       <Button variant="contained" onClick={onSubmit}>Register</Button>
     </Container>
+    </>
+    
   )
 }
 
