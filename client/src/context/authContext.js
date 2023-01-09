@@ -1,71 +1,48 @@
-import { useReducer, createContext } from 'react'
+import { jsx as _jsx } from "react/jsx-runtime";
+import { useReducer, createContext } from 'react';
 import jwtDecode from 'jwt-decode';
-
 const initalState = {
-  user: null
-}
-
+    user: null
+};
 if (window.localStorage.getItem("token")) {
-  const decodedToken = jwtDecode(window.localStorage.getItem("token"));
-
-  //Is it expired?
-  if (decodedToken.exp * 1000 < Date.now()) {
-    window.localStorage.removeItem("token");
-  }
-
-  else {
-    initalState.user = decodedToken;  
-  }
-}
-
-const AuthContext = createContext({
-  user: null,
-  login: (userData) => {},
-  logout: () => {},
-});
-
-const LOGIN = 'LOGIN'
-const LOGOUT = 'LOGOUT'
-
-function authReducer(state, action) {
-  switch(action.type) {
-    case 'LOGIN': 
-      return {
-        ...state,
-        user: action.payload
-      }
-
-    case 'LOGOUT': 
-    return {
-      ...state,
-      user: null
+    const decodedToken = jwtDecode(window.localStorage.getItem("token"));
+    //Is it expired?
+    if (decodedToken.exp * 1000 < Date.now()) {
+        window.localStorage.removeItem("token");
     }
-
-    default: 
-      return state;
-  }
+    else {
+        initalState.user = decodedToken;
+    }
 }
-
-function AuthProvider(props) {
-  const [state, dispatch] = useReducer(authReducer, initalState);
-
-  const login = (userData) => {
-    console.log(userData)
-    window.localStorage.setItem("token", userData.token);
-    dispatch({type:LOGIN, payload: userData});
-  }
-
-  const logout = () => {
-    window.localStorage.removeItem("token");
-    dispatch({ type:LOGOUT })
-  }
-
-  return (
-    <AuthContext.Provider
-      value={{user: state.user, login, logout}}
-      {...props}
-    />
-  )
+const AuthContext = createContext({
+    user: null,
+    login: (userData) => { },
+    logout: () => { },
+});
+const LOGIN = 'LOGIN';
+const LOGOUT = 'LOGOUT';
+//Will redadjust typing later
+function authReducer(state, action) {
+    switch (action.type) {
+        case 'LOGIN':
+            return Object.assign(Object.assign({}, state), { user: action.payload });
+        case 'LOGOUT':
+            return Object.assign(Object.assign({}, state), { user: null });
+        default:
+            return state;
+    }
 }
-
+const AuthProvider = (props) => {
+    const [state, dispatch] = useReducer(authReducer, initalState);
+    const login = (userData) => {
+        console.log(userData);
+        window.localStorage.setItem("token", userData.token);
+        dispatch({ type: LOGIN, payload: userData });
+    };
+    const logout = () => {
+        window.localStorage.removeItem("token");
+        dispatch({ type: LOGOUT });
+    };
+    return (_jsx(AuthContext.Provider, Object.assign({ value: { user: state.user, login, logout } }, props)));
+};
 export { AuthContext, AuthProvider };
