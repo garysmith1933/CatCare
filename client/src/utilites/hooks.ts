@@ -9,7 +9,7 @@ export const useForm = (callback: Function, initialState = {}) => {
     console.log(values);
   };
 
-  const onSubmit = (event:SubmitEvent) => {
+  const onSubmit = (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     callback();
   }

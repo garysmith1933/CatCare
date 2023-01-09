@@ -1,8 +1,7 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import { AuthContext } from "../context/authContext";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 const Navbar = () => {
     let navigate = useNavigate();
