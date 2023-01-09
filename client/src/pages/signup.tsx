@@ -74,14 +74,14 @@ function Signup() {
           onChange={onChange}
         />
       </Stack>
-      {errors.map( function(error: Error) {
+      {errors.map( function (error: Error) {
         return (
           <Alert severity="error">
             {error.message}
           </Alert>
         )
       })}
-  { /*@ts-ignore*/ }
+      {/*@ts-ignore*/}
       <Button variant="contained" onClick={onSubmit}>Register</Button>
     </Container>
   )
