@@ -24,6 +24,7 @@ const typeDefs = gql `
     email: String
     password: String
     token: String
+    id: String
   }
 
   type Cat {

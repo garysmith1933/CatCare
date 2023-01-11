@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 const Cat = require("../models/Cat");
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
 const uri = process.env.MONGO_URI;
 mongoose.connect(uri);
+
 
 //Users
 const Jackie = 

@@ -37,7 +37,7 @@ const resolvers = {
       const res = await newUser.save();
 
       return {
-        id: res.id,
+        id: res._id,
         ...res._doc
       }
     },
@@ -54,6 +54,8 @@ const resolvers = {
 
     loginUser: async (_root, {loginInput: {email, password}}) => {
       const user = await User.findOne({email});
+
+      console.log(user._id)
       
       if (user && (await bcrypt.compare(password, user.password))) {
 
@@ -66,11 +68,12 @@ const resolvers = {
         );
 
         user.token = token;
-
+        
         return {
-          id: user.id,
+          id: user._id,
           ...user._doc
         }
+
       } else {
         throw new ApolloError(`Incorrect password, 'INCORRECT_PASSWORD'`)
       }

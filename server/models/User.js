@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb")
 const mongoose = require("mongoose")
 
 const userSchema = new mongoose.Schema({
@@ -20,6 +21,10 @@ const userSchema = new mongoose.Schema({
 
   token: {
     type: String,
+  },
+
+  id: {
+    type: ObjectId,
   },
   
   cats: [{
