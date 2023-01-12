@@ -5,6 +5,7 @@ import Homepage from './pages/homePage';
 import Signup from './pages/signup';
 import Navbar from './components/Navbar';
 import Login from './pages/login'
+import NewCat from './pages/NewCat';
 
 const App: FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: FC = () => {
         <Route path="/" element={<Homepage/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
+        <Route path="/newCat" element={<NewCat/>}/>
       </Routes>
     </div>
   );

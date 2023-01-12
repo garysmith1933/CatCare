@@ -11,20 +11,21 @@ const Navbar: FC = () => {
     logout();
     navigate('/')
   }
-  console.log(user)
+
   return (
     <div className="navbar">
         { user ? 
-        <>
+        <div className="navItems" style={{marginLeft: "1rem", display: "flex", gap: 5}}>
           <Button variant="contained" style={{textDecoration: "none", color: "white"}} onClick={onLogout}>Logout</Button>
-        </>
+          <Link to='/newCat'>Register New Cat</Link>
+        </div>
         
         :
         <div className="navItems" style={{marginLeft: "1rem", display: "flex", gap: 5}}>
           <Link to='/home'>Home</Link> 
           <Link to='/login'>Login</Link> 
           <Link to='/signup'>Sign Up</Link>
-          </div>
+        </div>
         }
     </div>
   )
