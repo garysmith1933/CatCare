@@ -16,9 +16,8 @@ const NewCat = () => {
         age: '',
         weight: ''
     });
-    console.log(user.cats);
     return (
     //@ts-ignore
-    _jsxs(Container, Object.assign({ spacing: 2, maxWidth: "sm" }, { children: [_jsx("h3", { children: " Register Cats " }), _jsxs(Stack, Object.assign({ spacing: 2, paddingBottom: 2 }, { children: [_jsx(TextField, { label: "name", name: "name", onChange: onChange }), _jsx(TextField, { label: "breed", name: "breed", onChange: onChange }), _jsx(TextField, { label: "age", name: "age", onChange: onChange }), _jsx(TextField, { label: "weight", name: "weight", onChange: onChange })] })), _jsx(Button, Object.assign({ variant: "contained", onClick: onSubmit }, { children: "Register" }))] })));
+    _jsxs(Container, Object.assign({ spacing: 2, maxWidth: "sm" }, { children: [_jsx("h3", { children: " Register Cats " }), _jsxs(Stack, Object.assign({ spacing: 2, paddingBottom: 2 }, { children: [_jsx(TextField, { label: "Name", name: "name", onChange: onChange }), _jsx(TextField, { label: "Breed", name: "breed", onChange: onChange }), _jsx(TextField, { label: "Age", name: "age", onChange: onChange }), _jsx(TextField, { label: "Weight", name: "weight", onChange: onChange })] })), _jsx(Button, Object.assign({ variant: "contained", onClick: onSubmit }, { children: "Register" }))] })));
 };
 export default NewCat;

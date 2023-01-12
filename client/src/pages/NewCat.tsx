@@ -25,22 +25,22 @@ const NewCat: FC = () => {
      <h3> Register Cats </h3>
       <Stack spacing={2} paddingBottom={2}>
         <TextField
-              label="name"
+              label="Name"
               name="name"
               onChange={onChange}
         />
           <TextField
-              label="breed"
+              label="Breed"
               name="breed"
               onChange={onChange}
         />
           <TextField
-              label="age"
+              label="Age"
               name="age"
               onChange={onChange}
         />
           <TextField
-              label="weight"
+              label="Weight"
               name="weight"
               onChange={onChange}
         />

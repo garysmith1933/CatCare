@@ -34,6 +34,7 @@ const AuthContext = createContext({
   user: null,
   login: (userData: UserData) => {},
   logout: () => {},
+  registerCat: (id: string) => {}
 });
 
 const LOGIN = 'LOGIN'
@@ -74,9 +75,13 @@ const AuthProvider: FC<PropsWithChildren> = (props: any) => {
     dispatch({ type:LOGOUT })
   }
 
+  const registerCat = (id: string) => {
+    console.log('you got this far')
+  }
+
   return (
     <AuthContext.Provider
-      value={{user: state.user, login, logout}}
+      value={{user: state.user, login, logout, registerCat}}
       {...props}
     />
   )
