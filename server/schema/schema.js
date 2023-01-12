@@ -14,7 +14,7 @@ const typeDefs = gql `
     editUser(ID: ID!, userInput: UpdateUserInput): Boolean!
     loginUser(loginInput: LoginInput): User!
 
-    createCat(input: RegisterAndUpdateCatInput!): Cat!
+    registerCat(ID: ID!, input: RegisterAndUpdateCatInput!): Cat!
     deleteCat(ID: ID!): Boolean!
     editCat(ID: ID!, catInput: RegisterAndUpdateCatInput): Boolean! 
   }
