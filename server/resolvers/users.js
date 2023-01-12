@@ -54,8 +54,6 @@ const resolvers = {
 
     loginUser: async (_root, {loginInput: {email, password}}) => {
       const user = await User.findOne({email});
-
-      console.log(user._id)
       
       if (user && (await bcrypt.compare(password, user.password))) {
 

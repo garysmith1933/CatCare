@@ -1,6 +1,7 @@
 const Cat = require("../models/Cat");
 //Need to implement errors
 const { ApolloError } = require('apollo-server-errors');
+const User = require("../models/User");
 
 const resolvers = {
   Query: {
@@ -9,12 +10,24 @@ const resolvers = {
   },
 
   Mutation: {
-    createCat: async (_root, { input }) => {
+    registerCat: async (_root, { ID, input }) => {
       const cat = new Cat(input);
+    
+      const user = User.findById(ID, function(err, _user) {
+        if(err) console.log(err);
+
+        _user.cats.push(cat)
+        console.log(_user)
+
+        _user.save()
+      });
+
       const res = await cat.save();
+      console.log(res)
 
       return {
-        id: res.id,
+        owner: ID,
+        id: res._id,
         ...res._doc
       }
     },
