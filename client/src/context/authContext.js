@@ -18,6 +18,7 @@ const AuthContext = createContext({
     user: null,
     login: (userData) => { },
     logout: () => { },
+    registerCat: (id) => { }
 });
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
@@ -43,6 +44,9 @@ const AuthProvider = (props) => {
         window.localStorage.removeItem("token");
         dispatch({ type: LOGOUT });
     };
-    return (_jsx(AuthContext.Provider, Object.assign({ value: { user: state.user, login, logout } }, props)));
+    const registerCat = (id) => {
+        console.log('you got this far');
+    };
+    return (_jsx(AuthContext.Provider, Object.assign({ value: { user: state.user, login, logout, registerCat } }, props)));
 };
 export { AuthContext, AuthProvider };

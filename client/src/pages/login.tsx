@@ -13,6 +13,7 @@ mutation LoginUser($loginInput: LoginInput) {
     email
     username
     token
+    id
   }
 }
 `
