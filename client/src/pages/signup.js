@@ -12,6 +12,7 @@ const SIGNUP_USER = gql `
       email
       username
       token
+      id
     }
 }
 `;
