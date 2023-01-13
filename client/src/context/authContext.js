@@ -16,12 +16,14 @@ if (window.localStorage.getItem("token")) {
 }
 const AuthContext = createContext({
     user: null,
+    cats: [],
     login: (userData) => { },
     logout: () => { },
-    registerCat: (id) => { }
+    registerCat: (id, catData) => { }
 });
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
+const REGISTER_CAT = 'REGISTER_CAT';
 //Will redadjust typing later
 function authReducer(state, action) {
     switch (action.type) {
@@ -29,6 +31,9 @@ function authReducer(state, action) {
             return Object.assign(Object.assign({}, state), { user: action.payload });
         case 'LOGOUT':
             return Object.assign(Object.assign({}, state), { user: null });
+        case 'REGISTER_CAT': {
+            return Object.assign(Object.assign({}, state), { cats: [action.payload] });
+        }
         default:
             return state;
     }
@@ -36,7 +41,6 @@ function authReducer(state, action) {
 const AuthProvider = (props) => {
     const [state, dispatch] = useReducer(authReducer, initalState);
     const login = (userData) => {
-        console.log(userData);
         window.localStorage.setItem("token", userData.token);
         dispatch({ type: LOGIN, payload: userData });
     };
@@ -44,9 +48,10 @@ const AuthProvider = (props) => {
         window.localStorage.removeItem("token");
         dispatch({ type: LOGOUT });
     };
-    const registerCat = (id) => {
+    const registerCat = (id, catData) => {
         console.log('you got this far');
+        dispatch({ type: REGISTER_CAT, payload: { ID: id, input: catData } });
     };
-    return (_jsx(AuthContext.Provider, Object.assign({ value: { user: state.user, login, logout, registerCat } }, props)));
+    return (_jsx(AuthContext.Provider, Object.assign({ value: { user: state.user, login, logout, registerCat, state } }, props)));
 };
 export { AuthContext, AuthProvider };

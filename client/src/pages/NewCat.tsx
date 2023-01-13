@@ -3,20 +3,56 @@ import { useContext } from 'react';
 import { AuthContext } from '../context/authContext';
 import { useForm } from "../utilites/hooks";
 import { Container, TextField, Button, Stack, Alert } from '@mui/material';
+import { gql } from 'graphql-tag'
+import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
+
+const REGISTER_CAT = gql`
+  mutation registerCat($id: ID!, $input: RegisterAndUpdateCatInput!) {
+    registerCat(ID: $id, input: $input) {
+      name
+      breed
+      age
+      weight
+      owner
+    }
+}
+`
 
 const NewCat: FC = () => {
-  const { user }: any = useContext(AuthContext);
+  const context = useContext(AuthContext);
+  const { user, state }: any = context
+  const { user_id } = user;
   const [ errors, setErrors ]: any = useState([]);
+  const navigate = useNavigate();
 
-  function registerNewCat() {
+  console.log(context);
+
+  function registerNewCatCallback() {
     //call the function that creates the mutation
+    console.log('running')
+    registerCat();
   }
 
-  const { onChange, onSubmit, values } = useForm(registerNewCat, {
+  const { onChange, onSubmit, values } = useForm(registerNewCatCallback, {
     name:'',
     breed:'',
     age: '',
     weight: ''
+  })
+
+  const [ registerCat, { loading } ] = useMutation(REGISTER_CAT, {
+    update(proxy, { data: { registerCat: catData }}) {
+      context.registerCat(user_id, catData);
+      navigate('/');
+      console.log(state)
+    },
+
+    onError({ graphQLErrors }) {
+      setErrors(graphQLErrors);
+    },
+
+    variables: { id: user_id, input: values }
   })
   
   return (

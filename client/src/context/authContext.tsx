@@ -7,6 +7,13 @@ type UserData = {
   token: string
 }
 
+type CatData = {
+  name: string,
+  breed: string,
+  age: string,
+  weight: string
+}
+
 const initalState: {
   user: null | JwtPayload
 } = {
@@ -32,13 +39,15 @@ if (window.localStorage.getItem("token")) {
 
 const AuthContext = createContext({
   user: null,
+  cats: [],
   login: (userData: UserData) => {},
   logout: () => {},
-  registerCat: (id: string) => {}
+  registerCat: (id: string, catData: CatData) => {}
 });
 
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
+const REGISTER_CAT = 'REGISTER_CAT'
 
 //Will redadjust typing later
 function authReducer(state: State, action: any) {
@@ -55,6 +64,13 @@ function authReducer(state: State, action: any) {
       user: null
     }
 
+    case 'REGISTER_CAT': {
+      return {
+        ...state,
+        cats: [action.payload]
+      }
+    }
+
     default: 
       return state;
   }
@@ -65,7 +81,6 @@ const AuthProvider: FC<PropsWithChildren> = (props: any) => {
   const [state, dispatch] = useReducer(authReducer, initalState);
 
   const login = (userData: UserData) => {
-    console.log(userData)
     window.localStorage.setItem("token", userData.token);
     dispatch({type:LOGIN, payload: userData});
   }
@@ -75,13 +90,14 @@ const AuthProvider: FC<PropsWithChildren> = (props: any) => {
     dispatch({ type:LOGOUT })
   }
 
-  const registerCat = (id: string) => {
+  const registerCat = (id: string, catData: CatData) => {
     console.log('you got this far')
+    dispatch({type: REGISTER_CAT, payload:{ID: id, input: catData}});
   }
 
   return (
     <AuthContext.Provider
-      value={{user: state.user, login, logout, registerCat}}
+      value={{user: state.user, login, logout, registerCat, state}}
       {...props}
     />
   )
