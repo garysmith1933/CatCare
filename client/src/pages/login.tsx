@@ -6,11 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Button, Stack, Alert } from '@mui/material';
 import Container from '@mui/material/Container'
 import { LOGIN_USER } from "../graphql/mutations";
+import { login } from "../store/reducers/user";
+import { useAppDispatch } from "../store/hooks";
 
 const Login = () => {
   let navigate = useNavigate();
   const context = useContext(AuthContext);
   const [ errors, setErrors ]: any = useState([]);
+  const dispatch = useAppDispatch();
 
   function loginUserCallback() {
     loginUser();
@@ -25,7 +28,8 @@ const Login = () => {
   const [ loginUser, { loading } ] = useMutation(LOGIN_USER, {
     update(proxy, { data: { loginUser: userData }}) {
       console.log('we made it')
-      context.login(userData);
+      //thunk
+      dispatch(login(userData));
       navigate('/');
     },
 

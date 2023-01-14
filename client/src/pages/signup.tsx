@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Button, Container, Stack, Alert } from '@mui/material';
 import { SIGNUP_USER } from "../graphql/mutations";
 
-
 function Signup() {
   const context = useContext(AuthContext);
   let navigate = useNavigate();
