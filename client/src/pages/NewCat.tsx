@@ -3,21 +3,9 @@ import { useContext } from 'react';
 import { AuthContext } from '../context/authContext';
 import { useForm } from "../utilites/hooks";
 import { Container, TextField, Button, Stack, Alert } from '@mui/material';
-import { gql } from 'graphql-tag'
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-
-const REGISTER_CAT = gql`
-  mutation registerCat($id: ID!, $input: RegisterAndUpdateCatInput!) {
-    registerCat(ID: $id, input: $input) {
-      name
-      breed
-      age
-      weight
-      owner
-    }
-}
-`
+import { REGISTER_CAT } from '../graphql/mutations';
 
 const NewCat: FC = () => {
   const context = useContext(AuthContext);
@@ -34,6 +22,7 @@ const NewCat: FC = () => {
     registerCat();
   }
 
+  //lets change this to the a thunk that 
   const { onChange, onSubmit, values } = useForm(registerNewCatCallback, {
     name:'',
     breed:'',

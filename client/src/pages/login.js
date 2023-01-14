@@ -3,20 +3,10 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import { useForm } from "../utilites/hooks";
 import { useMutation } from "@apollo/react-hooks";
-import { gql } from "graphql-tag";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Stack, Alert } from '@mui/material';
 import Container from '@mui/material/Container';
-const LOGIN_USER = gql `
-mutation LoginUser($loginInput: LoginInput) {
-  loginUser(loginInput: $loginInput) {
-    email
-    username
-    token
-    id
-  }
-}
-`;
+import { LOGIN_USER } from "../graphql/mutations";
 const Login = () => {
     let navigate = useNavigate();
     const context = useContext(AuthContext);
