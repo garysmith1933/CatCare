@@ -4,7 +4,6 @@ import { useContext } from 'react';
 
 const Homepage: FC = () => {
   const { user }: any = useContext(AuthContext)
-  console.log(user)
   return (
     <>
       <h1> This is the homepage </h1>

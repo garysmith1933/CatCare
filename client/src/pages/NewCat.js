@@ -4,20 +4,9 @@ import { useContext } from 'react';
 import { AuthContext } from '../context/authContext';
 import { useForm } from "../utilites/hooks";
 import { Container, TextField, Button, Stack } from '@mui/material';
-import { gql } from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-const REGISTER_CAT = gql `
-  mutation registerCat($id: ID!, $input: RegisterAndUpdateCatInput!) {
-    registerCat(ID: $id, input: $input) {
-      name
-      breed
-      age
-      weight
-      owner
-    }
-}
-`;
+import { REGISTER_CAT } from '../graphql/mutations';
 const NewCat = () => {
     const context = useContext(AuthContext);
     const { user, state } = context;
@@ -30,6 +19,7 @@ const NewCat = () => {
         console.log('running');
         registerCat();
     }
+    //lets change this to the a thunk that 
     const { onChange, onSubmit, values } = useForm(registerNewCatCallback, {
         name: '',
         breed: '',
@@ -49,6 +39,6 @@ const NewCat = () => {
     });
     return (
     //@ts-ignore
-    _jsxs(Container, Object.assign({ spacing: 2, maxWidth: "sm" }, { children: [_jsx("h3", { children: " Register Cats " }), _jsxs(Stack, Object.assign({ spacing: 2, paddingBottom: 2 }, { children: [_jsx(TextField, { label: "Name", name: "name", onChange: onChange }), _jsx(TextField, { label: "Breed", name: "breed", onChange: onChange }), _jsx(TextField, { label: "Age", name: "age", onChange: onChange }), _jsx(TextField, { label: "Weight", name: "weight", onChange: onChange })] })), _jsx(Button, Object.assign({ variant: "contained", onClick: onSubmit }, { children: "Register" }))] })));
+    _jsxs(Container, { spacing: 2, maxWidth: "sm", children: [_jsx("h3", { children: " Register Cats " }), _jsxs(Stack, { spacing: 2, paddingBottom: 2, children: [_jsx(TextField, { label: "Name", name: "name", onChange: onChange }), _jsx(TextField, { label: "Breed", name: "breed", onChange: onChange }), _jsx(TextField, { label: "Age", name: "age", onChange: onChange }), _jsx(TextField, { label: "Weight", name: "weight", onChange: onChange })] }), _jsx(Button, { variant: "contained", onClick: onSubmit, children: "Register" })] }));
 };
 export default NewCat;

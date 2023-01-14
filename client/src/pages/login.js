@@ -3,24 +3,17 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import { useForm } from "../utilites/hooks";
 import { useMutation } from "@apollo/react-hooks";
-import { gql } from "graphql-tag";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Stack, Alert } from '@mui/material';
 import Container from '@mui/material/Container';
-const LOGIN_USER = gql `
-mutation LoginUser($loginInput: LoginInput) {
-  loginUser(loginInput: $loginInput) {
-    email
-    username
-    token
-    id
-  }
-}
-`;
+import { LOGIN_USER } from "../graphql/mutations";
+import { login } from "../store/reducers/user";
+import { useAppDispatch } from "../store/hooks";
 const Login = () => {
     let navigate = useNavigate();
     const context = useContext(AuthContext);
     const [errors, setErrors] = useState([]);
+    const dispatch = useAppDispatch();
     function loginUserCallback() {
         loginUser();
     }
@@ -31,7 +24,8 @@ const Login = () => {
     const [loginUser, { loading }] = useMutation(LOGIN_USER, {
         update(proxy, { data: { loginUser: userData } }) {
             console.log('we made it');
-            context.login(userData);
+            //thunk
+            dispatch(login(userData));
             navigate('/');
         },
         onError({ graphQLErrors }) {
@@ -41,8 +35,8 @@ const Login = () => {
     });
     return (
     //@ts-ignore
-    _jsxs(Container, Object.assign({ spacing: 2, maxWidth: "sm" }, { children: [_jsx("h3", { children: "Login" }), _jsxs(Stack, Object.assign({ spacing: 2, paddingBottom: 2 }, { children: [_jsx(TextField, { label: "Email", name: "email", onChange: onChange }), _jsx(TextField, { label: "Password", name: "password", onChange: onChange })] })), errors.map(function (error) {
-                return (_jsx(Alert, Object.assign({ severity: "error" }, { children: error.message })));
-            }), _jsx(Button, Object.assign({ variant: "contained", onClick: onSubmit }, { children: "Register" }))] })));
+    _jsxs(Container, { spacing: 2, maxWidth: "sm", children: [_jsx("h3", { children: "Login" }), _jsxs(Stack, { spacing: 2, paddingBottom: 2, children: [_jsx(TextField, { label: "Email", name: "email", onChange: onChange }), _jsx(TextField, { label: "Password", name: "password", onChange: onChange })] }), errors.map(function (error) {
+                return (_jsx(Alert, { severity: "error", children: error.message }));
+            }), _jsx(Button, { variant: "contained", onClick: onSubmit, children: "Register" })] }));
 };
 export default Login;

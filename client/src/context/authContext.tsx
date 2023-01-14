@@ -14,14 +14,21 @@ type CatData = {
   weight: string
 }
 
+//we lose the user data from our dispatch on refresh and replaced with this. find a way to seperate the token from the user
 const initalState: {
-  user: null | JwtPayload
+  //may need to adjust this.
+  token: JwtPayload | null
+  user: null | UserData,
+  cats: CatData[]
 } = {
-  user: null
+  token: null,
+  user: null,
+  cats: []
 }
 
 type State = {
-  user: UserData
+  user: UserData,
+  cats: CatData[]
 }
 
 if (window.localStorage.getItem("token")) {
@@ -33,7 +40,7 @@ if (window.localStorage.getItem("token")) {
   }
 
   else {
-    initalState.user = decodedToken;  
+    initalState.token = decodedToken;  
   }
 }
 
@@ -52,22 +59,24 @@ const REGISTER_CAT = 'REGISTER_CAT'
 //Will redadjust typing later
 function authReducer(state: State, action: any) {
   switch(action.type) {
-    case 'LOGIN': 
+    case LOGIN: 
       return {
         ...state,
         user: action.payload
       }
 
-    case 'LOGOUT': 
+    case LOGOUT: 
     return {
       ...state,
       user: null
     }
 
-    case 'REGISTER_CAT': {
+    case REGISTER_CAT: {
+      //this shows, yet the state does not update with the cat data
+      console.log('here we are', action.payload)
       return {
         ...state,
-        cats: [action.payload]
+        cats: [...state.cats, action.payload]
       }
     }
 
@@ -91,8 +100,8 @@ const AuthProvider: FC<PropsWithChildren> = (props: any) => {
   }
 
   const registerCat = (id: string, catData: CatData) => {
-    console.log('you got this far')
-    dispatch({type: REGISTER_CAT, payload:{ID: id, input: catData}});
+    console.log(catData)
+    dispatch({type: REGISTER_CAT, payload:{...catData}});
   }
 
   return (

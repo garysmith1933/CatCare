@@ -3,7 +3,7 @@ export const useForm = (callback, initialState = {}) => {
     const [values, setValues] = useState(initialState);
     const onChange = (event) => {
         let target = event.target;
-        setValues(Object.assign(Object.assign({}, values), { [target.name]: target.value }));
+        setValues({ ...values, [target.name]: target.value });
         console.log(values);
     };
     const onSubmit = (event) => {

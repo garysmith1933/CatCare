@@ -1,8 +1,11 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useReducer, createContext } from 'react';
 import jwtDecode from 'jwt-decode';
+//we lose the user data from our dispatch on refresh and replaced with this. find a way to seperate the token from the user
 const initalState = {
-    user: null
+    token: null,
+    user: null,
+    cats: []
 };
 if (window.localStorage.getItem("token")) {
     const decodedToken = jwtDecode(window.localStorage.getItem("token"));
@@ -11,7 +14,7 @@ if (window.localStorage.getItem("token")) {
         window.localStorage.removeItem("token");
     }
     else {
-        initalState.user = decodedToken;
+        initalState.token = decodedToken;
     }
 }
 const AuthContext = createContext({
@@ -27,12 +30,23 @@ const REGISTER_CAT = 'REGISTER_CAT';
 //Will redadjust typing later
 function authReducer(state, action) {
     switch (action.type) {
-        case 'LOGIN':
-            return Object.assign(Object.assign({}, state), { user: action.payload });
-        case 'LOGOUT':
-            return Object.assign(Object.assign({}, state), { user: null });
-        case 'REGISTER_CAT': {
-            return Object.assign(Object.assign({}, state), { cats: [action.payload] });
+        case LOGIN:
+            return {
+                ...state,
+                user: action.payload
+            };
+        case LOGOUT:
+            return {
+                ...state,
+                user: null
+            };
+        case REGISTER_CAT: {
+            //this shows, yet the state does not update with the cat data
+            console.log('here we are', action.payload);
+            return {
+                ...state,
+                cats: [...state.cats, action.payload]
+            };
         }
         default:
             return state;
@@ -49,9 +63,9 @@ const AuthProvider = (props) => {
         dispatch({ type: LOGOUT });
     };
     const registerCat = (id, catData) => {
-        console.log('you got this far');
-        dispatch({ type: REGISTER_CAT, payload: { ID: id, input: catData } });
+        console.log(catData);
+        dispatch({ type: REGISTER_CAT, payload: { ...catData } });
     };
-    return (_jsx(AuthContext.Provider, Object.assign({ value: { user: state.user, login, logout, registerCat, state } }, props)));
+    return (_jsx(AuthContext.Provider, { value: { user: state.user, login, logout, registerCat, state }, ...props }));
 };
 export { AuthContext, AuthProvider };

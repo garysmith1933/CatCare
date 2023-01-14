@@ -2,20 +2,9 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import { useForm } from "../utilites/hooks";
 import { useMutation } from "@apollo/react-hooks";
-import { gql } from "graphql-tag"
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Container, Stack, Alert } from '@mui/material';
-
-const SIGNUP_USER =  gql`
-  mutation Mutation($userInput: NewUserInput!) {
-    createUser(userInput: $userInput) {
-      email
-      username
-      token
-      id
-    }
-}
-`
+import { SIGNUP_USER } from "../graphql/mutations";
 
 function Signup() {
   const context = useContext(AuthContext);

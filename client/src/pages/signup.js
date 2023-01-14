@@ -3,19 +3,9 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import { useForm } from "../utilites/hooks";
 import { useMutation } from "@apollo/react-hooks";
-import { gql } from "graphql-tag";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Container, Stack, Alert } from '@mui/material';
-const SIGNUP_USER = gql `
-  mutation Mutation($userInput: NewUserInput!) {
-    createUser(userInput: $userInput) {
-      email
-      username
-      token
-      id
-    }
-}
-`;
+import { SIGNUP_USER } from "../graphql/mutations";
 function Signup() {
     const context = useContext(AuthContext);
     let navigate = useNavigate();
@@ -43,8 +33,8 @@ function Signup() {
     });
     return (
     //@ts-ignore
-    _jsxs(Container, Object.assign({ spacing: 2, maxWidth: "sm" }, { children: [_jsx("h3", { children: "Register" }), _jsx("p", { children: "Create Account" }), _jsxs(Stack, Object.assign({ spacing: 2, paddingBottom: 2 }, { children: [_jsx(TextField, { label: "Username", name: "username", onChange: onChange }), _jsx(TextField, { label: "Email", name: "email", onChange: onChange }), _jsx(TextField, { label: "Password", name: "password", onChange: onChange }), _jsx(TextField, { label: "Confirm password", name: "confirmPassword", onChange: onChange })] })), errors.map(function (error) {
-                return (_jsx(Alert, Object.assign({ severity: "error" }, { children: error.message })));
-            }), _jsx(Button, Object.assign({ variant: "contained", onClick: onSubmit }, { children: "Register" }))] })));
+    _jsxs(Container, { spacing: 2, maxWidth: "sm", children: [_jsx("h3", { children: "Register" }), _jsx("p", { children: "Create Account" }), _jsxs(Stack, { spacing: 2, paddingBottom: 2, children: [_jsx(TextField, { label: "Username", name: "username", onChange: onChange }), _jsx(TextField, { label: "Email", name: "email", onChange: onChange }), _jsx(TextField, { label: "Password", name: "password", onChange: onChange }), _jsx(TextField, { label: "Confirm password", name: "confirmPassword", onChange: onChange })] }), errors.map(function (error) {
+                return (_jsx(Alert, { severity: "error", children: error.message }));
+            }), _jsx(Button, { variant: "contained", onClick: onSubmit, children: "Register" })] }));
 }
 export default Signup;

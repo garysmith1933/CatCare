@@ -10,9 +10,9 @@ const Navbar = () => {
         logout();
         navigate('/');
     };
-    return (_jsx("div", Object.assign({ className: "navbar" }, { children: user ?
-            _jsxs("div", Object.assign({ className: "navItems", style: { marginLeft: "1rem", display: "flex", gap: 5 } }, { children: [_jsx(Button, Object.assign({ variant: "contained", style: { textDecoration: "none", color: "white" }, onClick: onLogout }, { children: "Logout" })), _jsx(Link, Object.assign({ to: '/newCat' }, { children: "Register New Cat" }))] }))
+    return (_jsx("div", { className: "navbar", children: user ?
+            _jsxs("div", { className: "navItems", style: { marginLeft: "1rem", display: "flex", gap: 5 }, children: [_jsx(Button, { variant: "contained", style: { textDecoration: "none", color: "white" }, onClick: onLogout, children: "Logout" }), _jsx(Link, { to: '/newCat', children: "Register New Cat" })] })
             :
-                _jsxs("div", Object.assign({ className: "navItems", style: { marginLeft: "1rem", display: "flex", gap: 5 } }, { children: [_jsx(Link, Object.assign({ to: '/home' }, { children: "Home" })), _jsx(Link, Object.assign({ to: '/login' }, { children: "Login" })), _jsx(Link, Object.assign({ to: '/signup' }, { children: "Sign Up" }))] })) })));
+                _jsxs("div", { className: "navItems", style: { marginLeft: "1rem", display: "flex", gap: 5 }, children: [_jsx(Link, { to: '/home', children: "Home" }), _jsx(Link, { to: '/login', children: "Login" }), _jsx(Link, { to: '/signup', children: "Sign Up" })] }) }));
 };
 export default Navbar;
