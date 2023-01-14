@@ -31,13 +31,22 @@ const REGISTER_CAT = 'REGISTER_CAT';
 function authReducer(state, action) {
     switch (action.type) {
         case LOGIN:
-            return Object.assign(Object.assign({}, state), { user: action.payload });
+            return {
+                ...state,
+                user: action.payload
+            };
         case LOGOUT:
-            return Object.assign(Object.assign({}, state), { user: null });
+            return {
+                ...state,
+                user: null
+            };
         case REGISTER_CAT: {
             //this shows, yet the state does not update with the cat data
             console.log('here we are', action.payload);
-            return Object.assign(Object.assign({}, state), { cats: [...state.cats, action.payload] });
+            return {
+                ...state,
+                cats: [...state.cats, action.payload]
+            };
         }
         default:
             return state;
@@ -55,8 +64,8 @@ const AuthProvider = (props) => {
     };
     const registerCat = (id, catData) => {
         console.log(catData);
-        dispatch({ type: REGISTER_CAT, payload: Object.assign({}, catData) });
+        dispatch({ type: REGISTER_CAT, payload: { ...catData } });
     };
-    return (_jsx(AuthContext.Provider, Object.assign({ value: { user: state.user, login, logout, registerCat, state } }, props)));
+    return (_jsx(AuthContext.Provider, { value: { user: state.user, login, logout, registerCat, state }, ...props }));
 };
 export { AuthContext, AuthProvider };

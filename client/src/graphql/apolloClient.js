@@ -12,7 +12,10 @@ const httpLink = createHttpLink({
 });
 const authLink = setContext((_, { headers }) => {
     return {
-        headers: Object.assign(Object.assign({}, headers), { authorization: window.localStorage.getItem("token") || "" })
+        headers: {
+            ...headers,
+            authorization: window.localStorage.getItem("token") || ""
+        }
     };
 });
 const client = new ApolloClient({

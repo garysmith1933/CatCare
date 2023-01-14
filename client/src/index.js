@@ -9,4 +9,4 @@ import { AuthProvider } from './context/authContext';
 import { Provider } from 'react-redux';
 import store from './store/store';
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(_jsx(ApolloProvider, Object.assign({ client: client }, { children: _jsx(Provider, Object.assign({ store: store }, { children: _jsx(AuthProvider, { children: _jsx(BrowserRouter, { children: _jsx(App, {}) }) }) })) })));
+root.render(_jsx(ApolloProvider, { client: client, children: _jsx(Provider, { store: store, children: _jsx(AuthProvider, { children: _jsx(BrowserRouter, { children: _jsx(App, {}) }) }) }) }));

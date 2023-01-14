@@ -33,8 +33,8 @@ function Signup() {
     });
     return (
     //@ts-ignore
-    _jsxs(Container, Object.assign({ spacing: 2, maxWidth: "sm" }, { children: [_jsx("h3", { children: "Register" }), _jsx("p", { children: "Create Account" }), _jsxs(Stack, Object.assign({ spacing: 2, paddingBottom: 2 }, { children: [_jsx(TextField, { label: "Username", name: "username", onChange: onChange }), _jsx(TextField, { label: "Email", name: "email", onChange: onChange }), _jsx(TextField, { label: "Password", name: "password", onChange: onChange }), _jsx(TextField, { label: "Confirm password", name: "confirmPassword", onChange: onChange })] })), errors.map(function (error) {
-                return (_jsx(Alert, Object.assign({ severity: "error" }, { children: error.message })));
-            }), _jsx(Button, Object.assign({ variant: "contained", onClick: onSubmit }, { children: "Register" }))] })));
+    _jsxs(Container, { spacing: 2, maxWidth: "sm", children: [_jsx("h3", { children: "Register" }), _jsx("p", { children: "Create Account" }), _jsxs(Stack, { spacing: 2, paddingBottom: 2, children: [_jsx(TextField, { label: "Username", name: "username", onChange: onChange }), _jsx(TextField, { label: "Email", name: "email", onChange: onChange }), _jsx(TextField, { label: "Password", name: "password", onChange: onChange }), _jsx(TextField, { label: "Confirm password", name: "confirmPassword", onChange: onChange })] }), errors.map(function (error) {
+                return (_jsx(Alert, { severity: "error", children: error.message }));
+            }), _jsx(Button, { variant: "contained", onClick: onSubmit, children: "Register" })] }));
 }
 export default Signup;
