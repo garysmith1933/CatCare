@@ -24,8 +24,6 @@ const Login = () => {
 
   const [ loginUser, { loading } ] = useMutation(LOGIN_USER, {
     update(proxy, { data: { loginUser: userData }}) {
-      console.log('we made it', userData)
-      //thunk
       dispatch(login(userData));
       navigate('/');
     },

@@ -3,7 +3,6 @@ import { useAppSelector } from '../store/hooks';
 
 const Homepage: FC = () => {
   const { user } = useAppSelector(state => state.user);
-  console.log(user)
   return (
     <>
       <h1> This is the homepage </h1>

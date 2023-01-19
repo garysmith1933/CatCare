@@ -2,7 +2,6 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-run
 import { useAppSelector } from '../store/hooks';
 const Homepage = () => {
     const { user } = useAppSelector(state => state.user);
-    console.log(user);
     return (_jsxs(_Fragment, { children: [_jsx("h1", { children: " This is the homepage " }), user ?
                 _jsxs(_Fragment, { children: [_jsxs("p", { children: [" Welcome ", user.email, " "] }), _jsxs("p", { children: [" ", user.cats, " "] })] })
                 :

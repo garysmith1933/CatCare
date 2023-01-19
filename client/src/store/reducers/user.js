@@ -7,22 +7,21 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const login = createAsyncThunk('user/login', async (userData) => {
     window.localStorage.setItem("token", userData.token);
     return {
-        authToken: userData.token,
         user: userData
     };
 });
 const initialState = {
-    user: null,
-    token: ''
+    user: null
 };
 export const UserSlice = createSlice({
     name: 'User',
     initialState,
     reducers: {
         logout: (state) => {
+            window.localStorage.removeItem("token");
             return {
                 ...state,
-                token: null
+                user: null
             };
         }
     },
@@ -31,8 +30,7 @@ export const UserSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
             return {
                 ...state,
-                user: action.payload.user,
-                token: action.payload.authToken
+                user: action.payload.user
             };
         });
     }
