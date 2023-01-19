@@ -1,8 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
-import { AuthContext } from '../context/authContext';
-import { useContext } from 'react';
+import { useAppSelector } from '../store/hooks';
 const Homepage = () => {
-    const { user } = useContext(AuthContext);
+    const { user } = useAppSelector(state => state.user);
     return (_jsxs(_Fragment, { children: [_jsx("h1", { children: " This is the homepage " }), user ?
                 _jsxs(_Fragment, { children: [_jsxs("p", { children: [" Welcome ", user.email, " "] }), _jsxs("p", { children: [" ", user.cats, " "] })] })
                 :

@@ -1,17 +1,18 @@
 //import at top bug
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '../store';
+import userEvent from '@testing-library/user-event';
 
 interface UserData {
-    username: string
-    email: string
-    password: string
-    token: string
+  username: string
+  email: string
+  password: string
+  token: string
 }
 
 interface UserPayload {
   user: UserData
-  authToken: string
 }
 
 // interface InitialState {
@@ -20,18 +21,14 @@ interface UserPayload {
 // }
 
 export const login = createAsyncThunk('user/login', async (userData: UserData) => {
-  //apollo client mutate with the object containing the form data. 
-  console.log('you called?')
-  //the data returned will be set in action.payload
+  window.localStorage.setItem("token", userData.token);
   return {
-    authToken: userData.token,
     user: userData
   }
 })
 
 const initialState: any = {
-    user: null,
-    token: ''
+    user: null
 }
 
 export const UserSlice = createSlice({
@@ -39,9 +36,10 @@ export const UserSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
+      window.localStorage.removeItem("token")
       return {
         ...state,
-        token: null
+        user: null
       }
     }
   },
@@ -50,8 +48,7 @@ export const UserSlice = createSlice({
       .addCase(login.fulfilled, (state, action: PayloadAction<UserPayload>) => {
         return {
           ...state,
-          user: action.payload.user,
-          token: action.payload.authToken
+          user: action.payload.user
         }
       })
   }
@@ -59,4 +56,5 @@ export const UserSlice = createSlice({
 });
 
 export const { logout } = UserSlice.actions;
+export const User = (state: RootState) => state.user
 export default UserSlice.reducer;

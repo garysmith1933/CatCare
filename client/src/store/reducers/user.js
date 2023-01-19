@@ -1,29 +1,27 @@
+//import at top bug
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // interface InitialState {
 //   user?: UserData
 //   authToken?: string
 // }
 export const login = createAsyncThunk('user/login', async (userData) => {
-    //apollo client mutate with the object containing the form data. 
-    console.log('you called?');
-    //the data returned will be set in action.payload
+    window.localStorage.setItem("token", userData.token);
     return {
-        authToken: userData.token,
         user: userData
     };
 });
 const initialState = {
-    user: null,
-    token: ''
+    user: null
 };
 export const UserSlice = createSlice({
     name: 'User',
     initialState,
     reducers: {
         logout: (state) => {
+            window.localStorage.removeItem("token");
             return {
                 ...state,
-                token: null
+                user: null
             };
         }
     },
@@ -32,11 +30,11 @@ export const UserSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
             return {
                 ...state,
-                user: action.payload.user,
-                token: action.payload.authToken
+                user: action.payload.user
             };
         });
     }
 });
 export const { logout } = UserSlice.actions;
+export const User = (state) => state.user;
 export default UserSlice.reducer;

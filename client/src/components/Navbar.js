@@ -1,13 +1,17 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from 'react';
-import { AuthContext } from "../context/authContext";
 import { Button } from "@mui/material";
+import { useAppSelector } from "../store/hooks";
+import { logout } from "../store/reducers/user";
+import { useAppDispatch } from "../store/hooks";
 const Navbar = () => {
     let navigate = useNavigate();
-    const { user, logout } = useContext(AuthContext);
+    const { user } = useAppSelector(state => state.user);
+    const dispatch = useAppDispatch();
+    console.log(user);
     const onLogout = () => {
-        logout();
+        dispatch(logout());
+        console.log('logged out');
         navigate('/');
     };
     return (_jsx("div", { className: "navbar", children: user ?

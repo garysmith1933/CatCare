@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "../context/authContext";
+import { useState } from "react";
 import { useForm } from "../utilites/hooks";
 import { useMutation } from "@apollo/react-hooks";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +10,6 @@ import { useAppDispatch } from "../store/hooks";
 
 const Login = () => {
   let navigate = useNavigate();
-  const context = useContext(AuthContext);
   const [ errors, setErrors ]: any = useState([]);
   const dispatch = useAppDispatch();
 
@@ -24,11 +22,8 @@ const Login = () => {
     password: ''
   })
 
-
   const [ loginUser, { loading } ] = useMutation(LOGIN_USER, {
     update(proxy, { data: { loginUser: userData }}) {
-      console.log('we made it')
-      //thunk
       dispatch(login(userData));
       navigate('/');
     },
