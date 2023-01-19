@@ -1,20 +1,17 @@
 import { FC, useState } from 'react';
-import { useContext } from 'react'; 
-import { AuthContext } from '../context/authContext';
 import { useForm } from "../utilites/hooks";
 import { Container, TextField, Button, Stack, Alert } from '@mui/material';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { REGISTER_CAT } from '../graphql/mutations';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { registerNewCat } from '../store/reducers/cats';
 
 const NewCat: FC = () => {
-  const context = useContext(AuthContext);
-  const { user, state }: any = context
-  const { user_id } = user;
+  const { user } = useAppSelector(state => state.user);
+  const dispatch = useAppDispatch();
   const [ errors, setErrors ]: any = useState([]);
   const navigate = useNavigate();
-
-  console.log(context);
 
   function registerNewCatCallback() {
     //call the function that creates the mutation
@@ -32,16 +29,16 @@ const NewCat: FC = () => {
 
   const [ registerCat, { loading } ] = useMutation(REGISTER_CAT, {
     update(proxy, { data: { registerCat: catData }}) {
-      context.registerCat(user_id, catData);
+      console.log(catData)
+      dispatch(registerNewCat(catData));
       navigate('/');
-      console.log(state)
     },
 
     onError({ graphQLErrors }) {
       setErrors(graphQLErrors);
     },
 
-    variables: { id: user_id, input: values }
+    variables: { id: user.id, input: values }
   })
   
   return (

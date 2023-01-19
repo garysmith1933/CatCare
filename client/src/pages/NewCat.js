@@ -1,19 +1,17 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from 'react';
-import { useContext } from 'react';
-import { AuthContext } from '../context/authContext';
 import { useForm } from "../utilites/hooks";
 import { Container, TextField, Button, Stack } from '@mui/material';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { REGISTER_CAT } from '../graphql/mutations';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { registerNewCat } from '../store/reducers/cats';
 const NewCat = () => {
-    const context = useContext(AuthContext);
-    const { user, state } = context;
-    const { user_id } = user;
+    const { user } = useAppSelector(state => state.user);
+    const dispatch = useAppDispatch();
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
-    console.log(context);
     function registerNewCatCallback() {
         //call the function that creates the mutation
         console.log('running');
@@ -28,14 +26,14 @@ const NewCat = () => {
     });
     const [registerCat, { loading }] = useMutation(REGISTER_CAT, {
         update(proxy, { data: { registerCat: catData } }) {
-            context.registerCat(user_id, catData);
+            console.log(catData);
+            dispatch(registerNewCat(catData));
             navigate('/');
-            console.log(state);
         },
         onError({ graphQLErrors }) {
             setErrors(graphQLErrors);
         },
-        variables: { id: user_id, input: values }
+        variables: { id: user.id, input: values }
     });
     return (
     //@ts-ignore
