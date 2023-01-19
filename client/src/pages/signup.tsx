@@ -1,15 +1,16 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "../context/authContext";
+import { useState } from "react";
 import { useForm } from "../utilites/hooks";
 import { useMutation } from "@apollo/react-hooks";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Container, Stack, Alert } from '@mui/material';
 import { SIGNUP_USER } from "../graphql/mutations";
+import { login } from "../store/reducers/user";
+import { useAppDispatch } from "../store/hooks";
 
 function Signup() {
-  const context = useContext(AuthContext);
   let navigate = useNavigate();
   const [ errors, setErrors ]: any = useState([]);
+  const dispatch = useAppDispatch();
 
   function signupUserCallback() {
     console.log("Callback hit");
@@ -26,7 +27,7 @@ function Signup() {
   const [ signupUser, { loading } ] = useMutation(SIGNUP_USER, {
     update(proxy, { data: { createUser: userData }}) {
       console.log('we made it')
-      context.login(userData);
+      dispatch(login(userData));
       navigate('/');
     },
 
