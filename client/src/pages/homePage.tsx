@@ -1,9 +1,10 @@
 import { FC } from 'react';
-import { AuthContext } from '../context/authContext';
-import { useContext } from 'react'; 
+import { useAppSelector } from '../store/hooks';
+
 
 const Homepage: FC = () => {
-  const { user }: any = useContext(AuthContext)
+  const { user } = useAppSelector(state => state.user);
+  console.log(user)
   return (
     <>
       <h1> This is the homepage </h1>

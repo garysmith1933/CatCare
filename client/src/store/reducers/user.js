@@ -1,3 +1,4 @@
+//import at top bug
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // interface InitialState {
 //   user?: UserData
@@ -39,4 +40,5 @@ export const UserSlice = createSlice({
     }
 });
 export const { logout } = UserSlice.actions;
+export const User = (state) => state.user;
 export default UserSlice.reducer;

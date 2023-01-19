@@ -1,12 +1,13 @@
 //import at top bug
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '../store';
 
 interface UserData {
-    username: string
-    email: string
-    password: string
-    token: string
+  username: string
+  email: string
+  password: string
+  token: string
 }
 
 interface UserPayload {
@@ -59,4 +60,5 @@ export const UserSlice = createSlice({
 });
 
 export const { logout } = UserSlice.actions;
+export const User = (state: RootState) => state.user
 export default UserSlice.reducer;
