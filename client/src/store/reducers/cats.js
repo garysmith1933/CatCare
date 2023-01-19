@@ -1,6 +1,7 @@
 //import at top bug
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const registerNewCat = createAsyncThunk('cat/registerCat', async (catData) => {
+    console.log(catData);
     return {
         cat: catData
     };

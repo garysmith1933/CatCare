@@ -8,9 +8,10 @@ import { useAppDispatch } from "../store/hooks";
 const Navbar: FC = () => {
   let navigate = useNavigate();
   const { user } = useAppSelector(state => state.user)
+  const { cats } = useAppSelector(state => state.cats)
   const dispatch = useAppDispatch();
 
-  console.log(user)
+  console.log(cats)
 
   const onLogout = () => {
     dispatch(logout());

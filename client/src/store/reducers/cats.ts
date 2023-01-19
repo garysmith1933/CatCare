@@ -16,6 +16,7 @@ interface CatPayload {
 }
 
 export const registerNewCat = createAsyncThunk('cat/registerCat', async (catData: CatData) => {
+  console.log(catData)
   return {
     cat: catData
   }
