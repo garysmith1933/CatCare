@@ -1,6 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { useContext, useState } from "react";
-import { AuthContext } from "../context/authContext";
+import { useState } from "react";
 import { useForm } from "../utilites/hooks";
 import { useMutation } from "@apollo/react-hooks";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +10,6 @@ import { login } from "../store/reducers/user";
 import { useAppDispatch } from "../store/hooks";
 const Login = () => {
     let navigate = useNavigate();
-    const context = useContext(AuthContext);
     const [errors, setErrors] = useState([]);
     const dispatch = useAppDispatch();
     function loginUserCallback() {

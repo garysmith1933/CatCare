@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { useAppSelector } from '../store/hooks';
 
-
 const Homepage: FC = () => {
   const { user } = useAppSelector(state => state.user);
   console.log(user)
