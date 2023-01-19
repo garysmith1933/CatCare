@@ -5,9 +5,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 //   authToken?: string
 // }
 export const login = createAsyncThunk('user/login', async (userData) => {
-    //apollo client mutate with the object containing the form data. 
-    console.log('you called?');
-    //the data returned will be set in action.payload
+    window.localStorage.setItem("token", userData.token);
     return {
         authToken: userData.token,
         user: userData
