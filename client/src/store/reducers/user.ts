@@ -27,6 +27,12 @@ export const login = createAsyncThunk('user/login', async (userData: UserData) =
   }
 })
 
+// export const newCat = createAsyncThunk('user/newCat', async (catData: CatData) => {
+//   return {
+//     user: userData
+//   }
+// })
+
 const initialState: any = {
     user: null
 }
@@ -56,5 +62,5 @@ export const UserSlice = createSlice({
 });
 
 export const { logout } = UserSlice.actions;
-export const User = (state: RootState) => state.user
+export const user = (state: RootState) => state.user
 export default UserSlice.reducer;
