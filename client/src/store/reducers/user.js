@@ -1,5 +1,12 @@
 //import at top bug
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+// interface CatData {
+//   name: string
+//   age: string
+//   breed: string
+//   weight: string
+//   owner: string
+//  }
 // interface InitialState {
 //   user?: UserData
 //   authToken?: string
@@ -10,11 +17,13 @@ export const login = createAsyncThunk('user/login', async (userData) => {
         user: userData
     };
 });
-// export const newCat = createAsyncThunk('user/newCat', async (catData: CatData) => {
-//   return {
-//     user: userData
-//   }
-// })
+export const registerNewCat = createAsyncThunk('user/registerCat', async (userWithRegisteredCat) => {
+    console.log('hi', userWithRegisteredCat);
+    return {
+        user: userWithRegisteredCat,
+        // cat: userWithRegisteredCat.cats
+    };
+});
 const initialState = {
     user: null
 };
@@ -33,6 +42,12 @@ export const UserSlice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(login.fulfilled, (state, action) => {
+            return {
+                ...state,
+                user: action.payload.user
+            };
+        })
+            .addCase(registerNewCat.fulfilled, (state, action) => {
             return {
                 ...state,
                 user: action.payload.user

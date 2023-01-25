@@ -3,8 +3,10 @@ import { useAppSelector } from '../store/hooks';
 
 const Homepage: FC = () => {
   const { user } = useAppSelector(state => state.user);
-  const { cats } = useAppSelector(state => state.cats)
-  const userCats = JSON.stringify(cats.filter(((cat: { owner: any; }) => cat.owner === user.id)))
+  // const { cats } = useAppSelector(state => state.cats)
+  const userCats = 'hi'
+
+  console.log(user)
 
   return (
     <>
