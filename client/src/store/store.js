@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import UserReducer from './reducers/user';
-import CatReducer from './reducers/cats';
 const store = configureStore({
     reducer: {
-        user: UserReducer,
-        cats: CatReducer
+        user: UserReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
 });

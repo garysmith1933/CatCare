@@ -2,19 +2,27 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import userEvent from '@testing-library/user-event';
 
 interface UserData {
   username: string
   email: string
   password: string
   token: string
+  cats: []
 }
 
 interface UserPayload {
   user: UserData
 }
 
+// interface CatData {
+//   name: string
+//   age: string
+//   breed: string
+//   weight: string
+//   owner: string
+//  }
+ 
 // interface InitialState {
 //   user?: UserData
 //   authToken?: string
@@ -27,11 +35,13 @@ export const login = createAsyncThunk('user/login', async (userData: UserData) =
   }
 })
 
-// export const newCat = createAsyncThunk('user/newCat', async (catData: CatData) => {
-//   return {
-//     user: userData
-//   }
-// })
+export const registerNewCat = createAsyncThunk('user/registerCat', async (userWithRegisteredCat: UserData) => {
+  console.log('hi', userWithRegisteredCat)
+  return {
+    user: userWithRegisteredCat,
+    // cat: userWithRegisteredCat.cats
+  }
+})
 
 const initialState: any = {
     user: null
@@ -52,6 +62,12 @@ export const UserSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(login.fulfilled, (state, action: PayloadAction<UserPayload>) => {
+        return {
+          ...state,
+          user: action.payload.user
+        }
+      })
+      .addCase(registerNewCat.fulfilled, (state, action: PayloadAction<UserPayload>) => {
         return {
           ...state,
           user: action.payload.user

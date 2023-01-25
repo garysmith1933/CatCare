@@ -25,11 +25,17 @@ export const SIGNUP_USER =  gql`
 export const REGISTER_CAT = gql`
   mutation registerCat($id: ID!, $input: RegisterAndUpdateCatInput!) {
     registerCat(ID: $id, input: $input) {
-      name
-      breed
-      age
-      weight
-      owner
+      email
+      username
+      token
+      id
+      cats {
+        breed
+        name
+        age
+        owner
+        weight
+      }
     }
 }
 `

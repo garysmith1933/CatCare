@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { REGISTER_CAT } from '../graphql/mutations';
 import { useAppSelector, useAppDispatch } from '../store/hooks';
-import { registerNewCat } from '../store/reducers/cats';
+import { registerNewCat } from '../store/reducers/user';
 const NewCat = () => {
     const { user } = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
@@ -26,7 +26,6 @@ const NewCat = () => {
     });
     const [registerCat, { loading }] = useMutation(REGISTER_CAT, {
         update(proxy, { data: { registerCat: catData } }) {
-            console.log(catData);
             dispatch(registerNewCat(catData));
             navigate('/');
         },
