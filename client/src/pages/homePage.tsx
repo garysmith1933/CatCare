@@ -3,8 +3,8 @@ import { useAppSelector } from '../store/hooks';
 
 const Homepage: FC = () => {
   const { user } = useAppSelector(state => state.user);
-  // const { cats } = useAppSelector(state => state.cats)
-  const userCats = 'hi'
+  // const { cats } = user || null
+  const userCats = user.cats
 
   console.log(user)
 
@@ -14,7 +14,7 @@ const Homepage: FC = () => {
       {user ? 
       <>
         <p> Welcome {user.email} </p> 
-        <p>{userCats}</p>
+        {user ? user.cats.map((cat: { name: String; }) => <li> {cat.name} </li>) : null}
       </>
       :
         <p>There is no user currenly logged in</p>

@@ -26,7 +26,13 @@ export const REGISTER_CAT = gql `
       username
       token
       id
-      cats
+      cats {
+        breed
+        name
+        age
+        owner
+        weight
+      }
     }
 }
 `;
